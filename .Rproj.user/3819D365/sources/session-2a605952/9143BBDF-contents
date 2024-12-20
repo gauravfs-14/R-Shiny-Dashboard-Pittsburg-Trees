@@ -1,0 +1,20 @@
+library(shiny)
+library(leaflet)
+
+ui <- fluidPage(
+  leafletOutput("map", height = "600px")
+)
+
+server <- function(input, output, session) {
+  output$map <- renderLeaflet({
+    leaflet() %>%
+      addTiles() %>%
+      addCircleMarkers(
+        lat = c(40.441, 40.442, 40.443),
+        lng = c(-79.95, -79.94, -79.93),
+        popup = c("Marker 1", "Marker 2", "Marker 3")
+      )
+  })
+}
+
+shinyApp(ui, server)
